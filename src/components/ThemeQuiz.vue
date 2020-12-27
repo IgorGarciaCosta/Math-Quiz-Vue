@@ -2,7 +2,7 @@
   <div>
       <div v-if="isQuizStarted">
           <h4>{{operandLeft}} {{theme}} {{operandRight}}</h4>
-          <button v-for="answer of answers" :key="answer">{{answer}}</button>
+          <button @click="selectAnswer(answers)" v-for="answer of answers" :key="answer">{{answer}}</button>
       </div>
       
       <div v-if="!isQuizStarted">
@@ -29,11 +29,23 @@ export default {
       this.isQuizStarted = true;
       this.operandLeft = parseInt(Math.random() * 13);
       this.operandRight = parseInt(Math.random() * 13);
-        for(let i=0; i<5; i++){
-            const answer = this.operandLeft*parseInt(Math.random()*3)+
-                this.operandRight*parseInt(Math.random()*3);
-            this.answers.push(answer);
-        }
+      const methods = {//define o tipo de opração
+        '+':(a, b)=>a+b,
+        '-':(a, b)=>a-b,
+        '*':(a, b)=>a*b,
+        '/':(a, b)=>a/b,
+      }
+
+      const methodToUse = methods[this.theme];//operação selecionada colocada numa variável pra facilitar a manipulação
+      for(let i=0; i<5; i++){//número de opções
+          const answer = methodToUse(//define valorer aleatórios pra opções
+            parseInt(Math.random()*3), 
+            parseInt(Math.random()*3),
+          );  
+          this.answers.push(answer)//coloca dentro do array de opções
+      }
+      const expectedAnswer = methodToUse(this.operandLeft, this.operandRight);//resposta correta
+      this.answers[parseInt(Math.random()*this.answers.length)] = expectedAnswer;//coloca a resposta certa no meio das opções
     },
   },
 };
