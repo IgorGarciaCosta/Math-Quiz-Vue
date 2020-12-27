@@ -23,11 +23,11 @@ export default {
     changeTheme(theme) {
       this.theme = theme;
     },
-    clearTheme(){
-    this.theme = null;
+    clearTheme() {
+      this.theme = null;
+    },
   },
-  },
-  
+
   components: {
     ThemeSelector,
     ThemeQuiz,
@@ -36,8 +36,9 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -47,8 +48,11 @@ export default {
 }
 
 button {
+  font-family: "Josefin Sans", sans-serif;
+  color: black;
+  font-weight: 500;
   padding: 10px;
-  width: 160px;
+  width: 170px;
   height: 80px;
   margin-right: 10px;
   background-color: #ffae19;
